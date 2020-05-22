@@ -1,5 +1,3 @@
-#!/usr/local/bin/python
-# coding: latin-1
 
 #import requried modules
 
@@ -23,13 +21,18 @@ def index(type="", product="", usage="", price="", currency="" ):
     price = request.args.get('price', price)    
     currency = request.args.get('currency', currency)
     ip = request.remote_addr    
-    response = DbIpCity.get(ip, api_key='free')
+    #return error when coming from private ip
+    try:
+        response = DbIpCity.get(ip, api_key='free')    
+    except Exception:
+        return('oops, cannot find your location, are you coming from a public IP?')
+    
+    #convert lat and long to variables
     lat = response.latitude
     long = response.longitude
-    
     #print the vars for self testing
-    print(response.latitude)
-    print(response.longitude)
+    print(lat)
+    print(long)
     print ("the type is", type)
     print ("the product name is", product)
     print ("the usage is", usage)
@@ -43,7 +46,7 @@ def index(type="", product="", usage="", price="", currency="" ):
                    usage=usage,
                    price=price,
                    currency=currency,
-                   origin_ip=request.remote_addr,
+                   origin_ip=ip,
                    latitude_location=lat,
                    longitude_location=long
                    )
@@ -51,6 +54,5 @@ def index(type="", product="", usage="", price="", currency="" ):
     return jsonobj
      
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')   
+    app.run(host='0.0.0.0') 
         
-
