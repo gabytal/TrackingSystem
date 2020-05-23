@@ -3,6 +3,11 @@
 
 from flask import Flask, request, jsonify
 from ip2geotools.databases.noncommercial import DbIpCity
+from datetime import datetime, date, time, timezone
+from elasticsearch import Elasticsearch
+import json
+
+
     
 app = Flask('flaskapp')
 
@@ -21,6 +26,7 @@ def index(type="", product="", usage="", price="", currency="" ):
     price = request.args.get('price', price)    
     currency = request.args.get('currency', currency)
     ip = request.remote_addr    
+    
     #return error when coming from private ip
     try:
         response = DbIpCity.get(ip, api_key='free')    
@@ -30,29 +36,35 @@ def index(type="", product="", usage="", price="", currency="" ):
     #convert lat and long to variables
     lat = response.latitude
     long = response.longitude
-    #print the vars for self testing
-    print(lat)
-    print(long)
-    print ("the type is", type)
-    print ("the product name is", product)
-    print ("the usage is", usage)
-    print ("the price is", price)
-    print ("the currency is", currency)
+    location ="{0},{1}".format(lat, long)
+
+    #convert data to JSON format
+    json_element={}
+    json_element['product']=product
+    json_element['usage']=usage
+    json_element['price']=price
+    json_element['currency']=currency
+    json_element['ip']=ip
+    json_element['lat']=lat
+    json_element['lon']=long
+    json_element['timestamp']=datetime.utcnow()
+    json_element['location']=location
+    
+    
 
     
-#convert data to JSON format
-    jsonobj =  jsonify(type=type,
-                   product=product,
-                   usage=usage,
-                   price=price,
-                   currency=currency,
-                   origin_ip=ip,
-                   latitude_location=lat,
-                   longitude_location=long
-                   )
+    client = Elasticsearch(hosts=["ec2-3-249-12-222.eu-west-1.compute.amazonaws.com:9200"])
+#do not forget the cluster URI and index name are external ENV
+       
     
-    return jsonobj
+    #send the json to elastic using Elastic python module
+    response = client.index(
+        index = 'my_index',
+        doc_type = '_doc',
+        body = json_element
+       )
+    
+    return json_element
      
 if __name__ == '__main__':
     app.run(host='0.0.0.0') 
-        
