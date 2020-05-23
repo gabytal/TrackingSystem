@@ -8,6 +8,7 @@ here are the definition for create a new index in elastic map:
 
 #create an index called "my_index" with the right properties:
 
+```JSON
 PUT my_index
 {
     "settings" : {
@@ -28,4 +29,6 @@ PUT my_index
     }
   }
 }
+
+```
 
