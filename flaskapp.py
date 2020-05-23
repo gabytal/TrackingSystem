@@ -54,11 +54,10 @@ def index(type="", product="", usage="", price="", currency="" ):
       
     
     #send the json to elastic using Elastic python module
-    response = client.index(
-        index = 'my_index',
-        doc_type = '_doc',
-        body = json_element
-       )
+     try: 
+        response = client.index( index = 'my_index', doc_type = '_doc',   body = json_element )
+    except Exception:
+        return ('Error sending index to elastic search')
     
     return json_element
      
