@@ -1,5 +1,5 @@
 # TrackingSystem
-this is a tracking system, based on Python api with Flask.
+this is a tracking system, based on Python api with Flask framework.
 its basically take url Parameters from the user, build a Json file from it,
 take the origin IP of the requester, convert it to Lat & Long location format,
 then send it to elastic search with python elasticsearch module:
@@ -31,4 +31,10 @@ PUT my_index
 }
 
 ```
+docker compose details:
 
+  | SERVICE       | CONTAINER PORT | PORTS EXPOSED TO HOST   |
+  | ---------------| ------------- -| -----------------------| 
+  | Python API     |`5000'          | '5000'                 |
+  | Kibana         |'5601'          | '5601'                 |
+  | Elastic Search |'9200,9300      | '9200,9300'            |
