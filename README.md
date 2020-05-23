@@ -1,10 +1,10 @@
 # TrackingSystem
-this is a tracking system, based on Python api with Flask framework.
-its basically take url Parameters from the user, build a Json file from it,
-take the origin IP of the requester, convert it to Lat & Long location format,
-then send it to elastic search with python elasticsearch module:
+This is a tracking system, based on Python api with Flask framework.
+It basically takes url parameters from the user, builds a JSON file from it,
+takes the origin IP of the requester, converts it to Lat & Long location format,
+then sends it to elastic search with python Elasticsearch module:
 
-here are the definition for creating a new index in elastic search:
+Here is the configuration for creating a new index in elastic search:
 
 #create an index called "my_index" with the right properties:
 
@@ -31,7 +31,7 @@ PUT my_index
 }
 
 ```
-docker compose details:
+Docker-Compose details:
 
   | SERVICE | CONTAINER PORT | HOST PORT |
   | ------------- | ------------- | ----- |
