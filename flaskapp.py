@@ -11,9 +11,6 @@ import json
     
 app = Flask('flaskapp')
 
-# Decorator defines a route
-# http://localhost:5000/
-
 #set the proper GET endpoint
 @app.route('/tracking', methods=["GET"])
 
@@ -52,10 +49,9 @@ def index(type="", product="", usage="", price="", currency="" ):
     
     
 
-    
+    #set ElasticSearch host
     client = Elasticsearch(hosts=["localhost:9200"])
-#do not forget the cluster URI and index name are external ENV
-       
+      
     
     #send the json to elastic using Elastic python module
     response = client.index(
