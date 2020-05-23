@@ -1,2 +1,4 @@
 Flask 
 ip2geotools
+datetime
+elasticsearch
