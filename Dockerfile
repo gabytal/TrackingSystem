@@ -2,15 +2,10 @@ FROM python:3.6
 
 MAINTAINER Gaby Tal "gabytal333@gmail.com"
 
-#copy the module requirements
-COPY ./requirements.txt /app/requirements.txt
+COPY . /app
 
 WORKDIR /app
 
 RUN pip install -r requirements.txt
 
-COPY . /app
-
-ENTRYPOINT ["python"]
-
-CMD ["flaskapp.py"]
+CMD ["python", "flaskapp.py"]
