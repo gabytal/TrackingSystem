@@ -33,8 +33,8 @@ PUT my_index
 ```
 docker compose details:
 
-  | SERVICE       | CONTAINER PORT | PORTS EXPOSED TO HOST   |
-  | ---------------| ------------- -| -----------------------| 
-  | Python API     |`5000'          | '5000'                 |
-  | Kibana         |'5601'          | '5601'                 |
-  | Elastic Search |'9200,9300      | '9200,9300'            |
+  | SERVICE | CONTAINER PORT | HOST PORT |
+  | ------------- | ------------- | ----- |
+  | Python API  | 5000   | 5000 |
+  | Kibana  | 5601 | 5601 |
+  | Elastic Search | 9200, 9300 | 9200, 9300 |
