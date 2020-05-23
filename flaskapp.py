@@ -6,8 +6,6 @@ from ip2geotools.databases.noncommercial import DbIpCity
 from datetime import datetime, date, time, timezone
 from elasticsearch import Elasticsearch
 import json
-
-
     
 app = Flask('flaskapp')
 
@@ -46,14 +44,11 @@ def index(type="", product="", usage="", price="", currency="" ):
     json_element['lon']=long
     json_element['timestamp']=datetime.utcnow()
     json_element['location']=location
-    
-    
 
     #set ElasticSearch host
     client = Elasticsearch(hosts=["http://elasticsearch:9200"])
-      
-    
-    #send the json to elastic using Elastic python module
+   
+    #send the JSON to elastic using elasticsearch python module
      try: 
         response = client.index( index = 'my_index', doc_type = '_doc',   body = json_element )
     except Exception:
