@@ -53,7 +53,7 @@ def index(type="", product="", usage="", price="", currency="" ):
     
 
     
-    client = Elasticsearch(hosts=["ec2-3-249-12-222.eu-west-1.compute.amazonaws.com:9200"])
+    client = Elasticsearch(hosts=["localhost:9200"])
 #do not forget the cluster URI and index name are external ENV
        
     
