@@ -50,7 +50,7 @@ def index(type="", product="", usage="", price="", currency="" ):
     
 
     #set ElasticSearch host
-    client = Elasticsearch(hosts=["localhost:9200"])
+    client = Elasticsearch(hosts=["http://elasticsearch:9200"])
       
     
     #send the json to elastic using Elastic python module
