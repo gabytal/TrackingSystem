@@ -1,6 +1,6 @@
 # TrackingSystem
 This is a tracking system, based on Python api with Flask framework.
-It basically takes url parameters from the user, builds a JSON file from it,
+It basically takes url parameters from the user, builds a JSON from it,
 takes the origin IP of the requester, converts it to Lat & Long location format,
 then sends it to elastic search with python Elasticsearch module:
 
